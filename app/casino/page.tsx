@@ -172,7 +172,7 @@ export default function CasinoPage() {
 
               <MiniChecklist
                 items={[
-                  "Availability for Finland/EU and the exact local terms shown during signup.",
+                  "Availability for EU and the exact local terms shown during signup.",
                   "Withdrawal/KYC expectations: assume standard verification can trigger at first meaningful cashout.",
                   "Promo terms (only if you take them): wagering, time limits, max bet, restricted games.",
                   "Payment method consistency: depositing and withdrawing with the same method usually reduces reviews.",
@@ -245,7 +245,7 @@ export default function CasinoPage() {
                 </p>
 
                 <p style={{ margin: "10px 0 0" }}>
-                  <b>Country availability:</b> confirm Finland/EU access and read the local terms shown at signup.
+                  <b>Country availability:</b> confirm EU access and read the local terms shown at signup.
                 </p>
                 <p style={{ margin: "10px 0 0" }}>
                   <b>Promo terms (optional):</b> wagering requirement, time limit, max bet while bonused, restricted games.
