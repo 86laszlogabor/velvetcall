@@ -1,0 +1,7 @@
+﻿User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+
+Sitemap: https://www.velvetcall.com/sitemap.xml
+Host: https://www.velvetcall.com
