@@ -1,78 +1,115 @@
-// app/how-we-choose-partners/page.tsx
-import SkeletonPage from "@/components/SkeletonPage";
+import type { Metadata } from "next";
 
-export default function HowWeChoosePage() {
+export const metadata: Metadata = {
+  title: "About VelvetCall",
+  description:
+    "Why VelvetCall exists, how we choose partners, and what we will never claim or promise.",
+};
+
+export default function AboutPage() {
   return (
-    <SkeletonPage
-      title="How We Choose — The VelvetCall Filter"
-      lead="We are not a billboard. Every partner on VelvetCall passes a strict, real-world review process before we recommend them."
-    >
-      <div style={{ maxWidth: 820 }}>
-        <p className="lead">
-          The most common question we get is simple: <b>“Why is your list so short?”</b><br />
-          The answer is even simpler: because most operators fail our test.
-        </p>
+    <main className="site-main">
+      <section className="section" aria-label="About VelvetCall">
+        <div className="container">
+          <div className="section-title">
+            <h2>About VelvetCall</h2>
+            <div className="hint">A small list. Clear reasons. Entertainment-first.</div>
+          </div>
 
-        <p>
-          VelvetCall is a curated guide. For a casino or poker room to appear here, it must pass a
-          multi-stage, ruthless auditing process. If it doesn’t meet our standards, it doesn’t go live.
-          No exceptions.
-        </p>
+          <div
+            style={{
+              maxWidth: "78ch",
+              lineHeight: 1.6,
+              color: "rgba(255,255,255,0.86)",
+            }}
+          >
+            <h3 style={{ marginTop: 6 }}>1. Why this exists</h3>
+            <p>
+              Poker and casino content online is usually one of two extremes: either noisy “bonus
+              poster” pages, or forum threads that assume you already know the rules. VelvetCall is
+              built for a third option: a short list, written in plain language, for people who want
+              a clean setup and a smoother experience.
+            </p>
+            <p>
+              VelvetCall is a business. Some links are affiliate links, and we may earn a commission
+              if you sign up through them. That doesn’t mean “anything goes”. The point is simple:
+              we keep the list small so we can keep it coherent and updated.
+            </p>
 
-        <h2 style={{ marginTop: 28 }}>1. The “Money Talks” Test (Liquidity & Speed)</h2>
-        <p>
-          This is non-negotiable. If a platform cannot process crypto withdrawals within
-          <b> 24–48 hours</b>, it doesn’t belong here.
-        </p>
-        <p>
-          In 2026, the technology already exists. Slowness usually means one of two things:
-          liquidity problems or intentional friction. We deposit our own money, play real sessions,
-          and request withdrawals <b>before</b> we write a single word.
-        </p>
+            <h3>2. Why the list is short</h3>
+            <p>
+              We don’t try to cover every operator, every promo, or every country edge-case. That
+              creates long pages and short memories. Instead, we focus on a handful of platforms and
+              explain what people actually care about: the product experience, the payments, and the
+              practical day-to-day flow.
+            </p>
 
-        <h2 style={{ marginTop: 28 }}>2. The “Bonus Detector” (Fair Play)</h2>
-        <p>
-          We don’t care how big a bonus looks. We care how fair it actually is.
-        </p>
-        <ul>
-          <li>We filter out bonuses with extreme wagering requirements (50× or higher).</li>
-          <li>
-            We check max cashout clauses. If a site caps winnings at absurd levels,
-            it’s blacklisted immediately.
-          </li>
-        </ul>
+            <h4 style={{ marginBottom: 6 }}>What we prioritise</h4>
+            <ul style={{ paddingLeft: 18, marginTop: 8 }}>
+              <li style={{ marginBottom: 10 }}>
+                <b>Simple onboarding.</b> Clear steps, minimal confusion, and a setup that works on
+                mobile.
+              </li>
+              <li style={{ marginBottom: 10 }}>
+                <b>Usable promos.</b> If an offer needs a spreadsheet to understand, it’s usually not
+                worth your attention.
+              </li>
+              <li style={{ marginBottom: 10 }}>
+                <b>Everyday usability.</b> A stable client, readable rules, and a product that feels
+                built for real users — not just marketing.
+              </li>
+              <li>
+                <b>Country-fit awareness.</b> Availability and rules vary by country. We flag region
+                fit where we can and keep the tone straightforward.
+              </li>
+            </ul>
 
-        <h2 style={{ marginTop: 28 }}>3. Software & Stability</h2>
-        <p>
-          No one wants an app to crash during a high-stakes poker hand or a bonus round.
-        </p>
-        <ul>
-          <li>We test mobile clients on 4G, 5G, and Wi-Fi networks.</li>
-          <li>
-            We evaluate usability: Is the interface modern and intuitive, or does it feel
-            like software from 20 years ago?
-          </li>
-        </ul>
+            <h3>3. Poker in 2026: what people actually want</h3>
+            <p>
+              Most players aren’t looking for grand theories. They want games that run, software
+              that doesn’t fight them, and a place that feels enjoyable. That’s what we optimise for
+              in our poker pages: speed, clarity, and a clean experience — especially for mobile
+              players.
+            </p>
 
-        <h2 style={{ marginTop: 28 }}>4. Player Protection (Baseline Compliance)</h2>
-        <p>
-          Even in crypto-forward and offshore environments, we expect basic respect for the player.
-        </p>
-        <ul>
-          <li>Working responsible gaming tools (limits, self-exclusion).</li>
-          <li>Customer support that responds like humans — not endless bot loops.</li>
-        </ul>
+            <h3>4. Crypto: a practical option, not a religion</h3>
+            <p>
+              Some platforms use crypto rails because they’re fast and simple to use once you’re set
+              up. If you’re new to it, we treat it like a normal tool: explain the basics, keep
+              terminology light, and point you toward the safest “do-this-first” steps.
+            </p>
+            <p>
+              If crypto is not for you, that’s fine. VelvetCall is not here to convert anyone — it’s
+              here to help you choose a setup that matches how you actually want to play.
+            </p>
 
-        <h2 style={{ marginTop: 28 }}>The Bottom Line</h2>
-        <p>
-          We say <b>“No”</b> to roughly 90% of the offers we receive.
-          We only say <b>“Yes”</b> to the few platforms we would recommend to our own friends.
-        </p>
+            <h3>5. What we are not</h3>
+            <ul style={{ paddingLeft: 18, marginTop: 8 }}>
+              <li style={{ marginBottom: 10 }}>
+                <b>We don’t sell “winning systems”.</b> Poker and casino are entertainment. If you
+                want guarantees, you’re in the wrong place.
+              </li>
+              <li style={{ marginBottom: 10 }}>
+                <b>We don’t do hype.</b> No “best deals”, no miracle claims, no pressure tactics.
+              </li>
+              <li>
+                <b>We don’t pretend every brand fits every country.</b> Region rules and eligibility
+                can change; always follow local rules and operator terms.
+              </li>
+            </ul>
 
-        <p className="fineprint" style={{ marginTop: 16 }}>
-          This is the VelvetCall promise: fewer partners, clearer expectations, and no hidden surprises.
-        </p>
-      </div>
-    </SkeletonPage>
+            <h3 style={{ marginTop: 18 }}>6. Contact & corrections</h3>
+            <p>
+              If you spot something that looks outdated, or you want a quick confirmation before
+              you sign up, use the Contact page. We’d rather fix a page than “win” an argument.
+            </p>
+
+            <div className="fineprint" style={{ marginTop: 16 }}>
+              Updated: <code>2026-01-16</code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

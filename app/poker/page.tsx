@@ -1,11 +1,215 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import React from "react";
 
 export const metadata: Metadata = {
   title: "Poker | VelvetCall",
   description:
-    "Poker as entertainment — straight expectations, country-fit reality, and what to verify before you deposit.",
+    "Poker as entertainment — two mobile-first profiles and a clean way to join.",
 };
+
+function OutboundButton({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <a
+      className="btn primary"
+      href={href}
+      target="_blank"
+      rel="nofollow sponsored noopener"
+    >
+      {children}
+    </a>
+  );
+}
+
+function AffiliateBox({
+  brand,
+  href,
+  inviteLabel,
+  inviteCode,
+  rbNote,
+  extraNote,
+}: {
+  brand: string;
+  href: string;
+  inviteLabel: string;
+  inviteCode: string;
+  rbNote: string;
+  extraNote?: string;
+}) {
+  return (
+    <div
+      className="note"
+      style={{
+        marginTop: 12,
+        borderColor: "rgba(217, 179, 93, 0.22)",
+        background: "rgba(217, 179, 93, 0.06)",
+      }}
+      aria-label={`${brand} affiliate link and invite code`}
+    >
+      <b style={{ display: "block", marginBottom: 6 }}>
+        Join {brand} via VelvetCall
+      </b>
+
+      <span style={{ display: "block", lineHeight: 1.45 }}>
+        <span style={{ color: "rgba(255,255,255,0.86)" }}>Invite code:</span>{" "}
+        <b>{inviteCode}</b>{" "}
+        <span style={{ color: "rgba(255,255,255,0.70)" }}>
+          ({inviteLabel})
+        </span>
+        <br />
+        <span style={{ color: "rgba(255,255,255,0.86)" }}>Offer:</span> {rbNote}
+        {extraNote ? (
+          <>
+            <br />
+            <span style={{ color: "rgba(255,255,255,0.86)" }}>Note:</span>{" "}
+            {extraNote}
+          </>
+        ) : null}
+      </span>
+
+      <div className="cta-row" style={{ marginTop: 10 }}>
+        <OutboundButton href={href}>Join {brand}</OutboundButton>
+        <Link className="btn ghost" href="/policy">
+          Policy
+        </Link>
+      </div>
+
+      <div className="fineprint" style={{ marginTop: 10 }}>
+        18+. Play responsibly. Availability and terms can vary by country and
+        provider.
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Decorative, self-contained hero art (no image assets needed).
+ * Uses an inline SVG as a background image to fill the “empty” hero space tastefully.
+ */
+function HeroPokerArt() {
+  const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+    <defs>
+      <radialGradient id="g1" cx="30%" cy="20%" r="90%">
+        <stop offset="0%" stop-color="#d9b35d" stop-opacity="0.20"/>
+        <stop offset="45%" stop-color="#0b3a2a" stop-opacity="0.05"/>
+        <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="g2" cx="70%" cy="65%" r="80%">
+        <stop offset="0%" stop-color="#d9b35d" stop-opacity="0.14"/>
+        <stop offset="55%" stop-color="#0b3a2a" stop-opacity="0.06"/>
+        <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="strokeGold" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ffe9b0" stop-opacity="0.55"/>
+        <stop offset="60%" stop-color="#d9b35d" stop-opacity="0.28"/>
+        <stop offset="100%" stop-color="#d9b35d" stop-opacity="0.12"/>
+      </linearGradient>
+      <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="6" result="blur"/>
+        <feColorMatrix in="blur" type="matrix"
+          values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 0.55 0" result="blur2"/>
+        <feMerge>
+          <feMergeNode in="blur2"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+
+    <rect width="1200" height="520" fill="#071a13"/>
+    <rect width="1200" height="520" fill="url(#g1)"/>
+    <rect width="1200" height="520" fill="url(#g2)"/>
+
+    <!-- subtle grid -->
+    <g opacity="0.08">
+      ${Array.from({ length: 16 })
+        .map((_, i) => {
+          const x = 60 + i * 70;
+          return `<line x1="${x}" y1="0" x2="${x}" y2="520" stroke="#ffffff" stroke-width="1"/>`;
+        })
+        .join("")}
+      ${Array.from({ length: 8 })
+        .map((_, i) => {
+          const y = 60 + i * 60;
+          return `<line x1="0" y1="${y}" x2="1200" y2="${y}" stroke="#ffffff" stroke-width="1"/>`;
+        })
+        .join("")}
+    </g>
+
+    <!-- cards -->
+    <g filter="url(#softGlow)">
+      <g transform="translate(205,120) rotate(-10)">
+        <rect x="0" y="0" width="235" height="320" rx="18" fill="rgba(255,255,255,0.03)" stroke="url(#strokeGold)" stroke-width="2"/>
+        <path d="M40 70c22-24 54-24 76 0c22 24 0 48-38 76c-38-28-60-52-38-76z" fill="rgba(217,179,93,0.30)"/>
+        <text x="34" y="48" fill="rgba(255,241,207,0.60)" font-size="18" font-family="ui-sans-serif, system-ui">A</text>
+        <text x="36" y="312" fill="rgba(255,241,207,0.45)" font-size="18" font-family="ui-sans-serif, system-ui">A</text>
+      </g>
+
+      <g transform="translate(330,95) rotate(6)">
+        <rect x="0" y="0" width="250" height="340" rx="18" fill="rgba(255,255,255,0.035)" stroke="url(#strokeGold)" stroke-width="2"/>
+        <path d="M78 110c0-26 20-46 46-46c26 0 46 20 46 46c0 26-20 46-46 46c-26 0-46-20-46-46z" fill="rgba(217,179,93,0.22)"/>
+        <path d="M124 70l14 24l-28 0z" fill="rgba(217,179,93,0.22)"/>
+        <text x="32" y="54" fill="rgba(255,241,207,0.60)" font-size="18" font-family="ui-sans-serif, system-ui">K</text>
+        <text x="34" y="330" fill="rgba(255,241,207,0.45)" font-size="18" font-family="ui-sans-serif, system-ui">K</text>
+      </g>
+    </g>
+
+    <!-- chip -->
+    <g transform="translate(770,150)" filter="url(#softGlow)">
+      <circle cx="140" cy="140" r="120" fill="rgba(255,255,255,0.03)" stroke="url(#strokeGold)" stroke-width="3"/>
+      <circle cx="140" cy="140" r="92" fill="rgba(255,255,255,0.02)" stroke="rgba(217,179,93,0.22)" stroke-width="3"/>
+      <circle cx="140" cy="140" r="54" fill="rgba(217,179,93,0.10)" stroke="rgba(255,241,207,0.22)" stroke-width="2"/>
+      ${Array.from({ length: 10 })
+        .map((_, i) => {
+          const a = (i * Math.PI * 2) / 10;
+          const x1 = 140 + Math.cos(a) * 104;
+          const y1 = 140 + Math.sin(a) * 104;
+          const x2 = 140 + Math.cos(a) * 120;
+          const y2 = 140 + Math.sin(a) * 120;
+          return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(
+            1
+          )}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(
+            1
+          )}" stroke="rgba(217,179,93,0.28)" stroke-width="6" stroke-linecap="round"/>`;
+        })
+        .join("")}
+      <text x="140" y="153" text-anchor="middle" fill="rgba(255,241,207,0.55)" font-size="18" font-family="ui-sans-serif, system-ui">
+        VelvetCall
+      </text>
+    </g>
+
+    <!-- footer line -->
+    <path d="M120 460 C 360 420, 840 520, 1080 440" fill="none" stroke="rgba(217,179,93,0.16)" stroke-width="2"/>
+  </svg>`;
+
+  const dataUri = `data:image/svg+xml,${encodeURIComponent(svg)}`;
+
+  return (
+    <div
+      aria-hidden="true"
+      style={{
+        marginTop: 16,
+        height: 220,
+        borderRadius: 18,
+        border: "1px solid rgba(255,255,255,0.08)",
+        backgroundImage: `url("${dataUri}")`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        overflow: "hidden",
+        boxShadow: "0 18px 45px rgba(0,0,0,0.28)",
+      }}
+    />
+  );
+}
 
 export default function PokerPage() {
   return (
@@ -17,24 +221,24 @@ export default function PokerPage() {
             <div className="hero-grid">
               <div className="hero-left">
                 <span className="kicker">
-                  Poker as entertainment — clarity first, no fantasy economics.
+                  Poker as entertainment — clean picks, smooth mobile play.
                 </span>
 
                 <h1>Poker</h1>
 
                 <p className="lead">
-                  We cover poker as a real-money entertainment product: availability differs by country,
-                  payment rails matter, and “small print” can cost you time and frustration. Below are
-                  our two editorial poker profiles in full — QQPoker and KKPoker — written to solve
-                  the practical problems people actually run into.
+                  VelvetCall keeps poker simple: two profiles you can scan fast,
+                  then pick the vibe you want for a fun session. If you’re here
+                  for a clean shortlist and an easy join flow, start with one of
+                  the two options below.
                 </p>
 
                 <div className="cta-row" aria-label="Primary actions">
                   <Link className="btn primary" href="#qqpoker">
-                    QQPoker profile
+                    QQPoker (fast & mobile)
                   </Link>
                   <Link className="btn ghost" href="#kkpoker">
-                    KKPoker profile
+                    KKPoker (clubs & community)
                   </Link>
                 </div>
 
@@ -43,50 +247,47 @@ export default function PokerPage() {
                     Updated: <code>2026-01-16</code>
                   </span>
                   <span>
-                    Scope: <code>Finland / EU</code> (country-fit flagged)
+                    Scope: <code>EU</code> (availability varies)
                   </span>
                 </div>
+
+                <HeroPokerArt />
               </div>
 
-              <aside className="hero-right" aria-label="Quick nav">
+              {/* RIGHT SIDEBAR */}
+              <aside className="hero-right" aria-label="Join via VelvetCall">
                 <div className="panel-head">
-                  <h3>On this page</h3>
-                  <span className="tiny">2 profiles</span>
+                  <h3>Join via VelvetCall</h3>
+                  <span className="tiny">2 offers</span>
                 </div>
 
-                <div className="toplist" style={{ padding: 12 }}>
-                  <Link className="topitem" href="#qqpoker">
-                    <div className="logo" aria-hidden="true" />
-                    <div>
-                      <div className="name">
-                        QQPoker <span className="chip">Poker</span>
-                      </div>
-                      <div className="sub">
-                        Speed, crypto rails, Asian traffic, and practical risk checks.
-                      </div>
-                    </div>
-                    <div className="topitem-right">
-                      <span className="pilltag">Read</span>
-                    </div>
-                  </Link>
+                <div
+                  style={{
+                    padding: 12,
+                    display: "grid",
+                    gap: 12,
+                  }}
+                >
+                  <AffiliateBox
+                    brand="QQPoker"
+                    href="https://qqpk1007.cc:51999?shareCode=MG3VQU"
+                    inviteLabel="shareCode"
+                    inviteCode="MG3VQU"
+                    rbNote="up to 50% RB (varies)"
+                    extraNote="casino perks may include up to 10% cashback (terms apply)"
+                  />
 
-                  <Link className="topitem" href="#kkpoker">
-                    <div className="logo" aria-hidden="true" />
-                    <div>
-                      <div className="name">
-                        KKPoker <span className="chip">Poker</span>
-                      </div>
-                      <div className="sub">
-                        Club poker mechanics with licensing, cashier stability, and hybrid traffic.
-                      </div>
-                    </div>
-                    <div className="topitem-right">
-                      <span className="pilltag">Read</span>
-                    </div>
-                  </Link>
+                  <AffiliateBox
+                    brand="KKPoker"
+                    href="https://kkpoker.club/velvetcall"
+                    inviteLabel="invitecode"
+                    inviteCode="velvetcall"
+                    rbNote="up to 50% RB (varies)"
+                  />
 
-                  <div className="fineprint" style={{ marginTop: 8 }}>
-                    18+. Eligibility and availability vary by country. Always verify terms before depositing.
+                  <div className="fineprint" style={{ marginTop: 2 }}>
+                    New here? Start with the Policy page, then use the partner’s
+                    support for account-specific help.
                   </div>
                 </div>
               </aside>
@@ -99,113 +300,95 @@ export default function PokerPage() {
           <div className="container">
             <div className="section-title">
               <h2>Profiles</h2>
-              <div className="hint">Full text, practical framing, no “bonus directory” behavior.</div>
+              <div className="hint">
+                Two picks, written for quick scanning and an easy choice.
+              </div>
             </div>
 
             <div className="picks-grid">
               {/* QQPoker */}
               <article className="pick" id="qqpoker" aria-label="QQPoker profile">
                 <div className="pick-head">
-                  <h3 className="pick-title">QQPoker — Speed, Crypto, and the Advantage of the Asian Player Pool</h3>
+                  <h3 className="pick-title">
+                    QQPoker — Fast mobile poker (USDT-friendly)
+                  </h3>
                   <span className="pilltag">Poker</span>
                 </div>
 
                 <div className="pick-body">
                   <p className="pick-sub">
-                    QQPoker is built for players who have outgrown the slowness of traditional rooms and the friction of
-                    over-regulated systems. It combines modern technology (crypto) with a loose, action-heavy player pool
-                    that feels closer to online poker’s golden era. It’s not for everyone — but if speed and flexibility
-                    are your priorities, this is your arena.
+                    QQPoker is a mobile-first poker app made for quick sessions
+                    and fast table access. If you like an action-forward feel
+                    and you’re comfortable with modern cashier options (including
+                    crypto where available), this is the “get in and play” pick.
                   </p>
 
-                  <h4 style={{ margin: "14px 0 8px", fontSize: 14, letterSpacing: 0.2, color: "rgba(255, 241, 207, 0.92)" }}>
-                    Why professionals and recreational players choose QQPoker
+                  <h4
+                    style={{
+                      margin: "14px 0 8px",
+                      fontSize: 14,
+                      letterSpacing: 0.2,
+                      color: "rgba(255, 241, 207, 0.92)",
+                    }}
+                  >
+                    What people like about QQPoker
                   </h4>
+
                   <div className="faq" style={{ gap: 10 }}>
                     <details open>
-                      <summary>Instant liquidity with a USDT-based system</summary>
+                      <summary>Quick sessions, phone-first experience</summary>
                       <div className="faq-body">
-                        Forget multi-day bank transfers. QQPoker runs on USDT (TRC20), which means withdrawals typically
-                        reach your wallet within <b>15–60 minutes</b> based on 2026 data. No weekend delays, no banking
-                        bottlenecks.
+                        QQPoker is built with mobile as the default. It’s an
+                        easy choice if you want to hop in for a session without
+                        needing a full desktop setup.
                       </div>
                     </details>
 
                     <details>
-                      <summary>The reality of a “soft field”</summary>
+                      <summary>Modern cashier options (where available)</summary>
                       <div className="faq-body">
-                        While many European rooms are saturated with HUD-driven regulars, QQPoker’s Asian-centric ecosystem
-                        is built around entertainment and action. Play tends to be looser, with more recreational players
-                        — creating higher win-rate potential for those who actually understand the game.
+                        In many setups you’ll see crypto-friendly rails in the
+                        cashier, which can be a convenient alternative to
+                        traditional banking. The exact options depend on your
+                        country and what the app shows for your account.
                       </div>
                     </details>
 
                     <details>
-                      <summary>Mobile-first freedom</summary>
+                      <summary>Action-forward vibe</summary>
                       <div className="faq-body">
-                        This is not a stripped-down mobile client. The app delivers a stable, near desktop-level poker
-                        experience, allowing you to play full-depth tables from anywhere — even a café in Helsinki.
+                        Sessions often feel more “play-first” than study-heavy.
+                        If your goal is enjoyment and volume of hands rather
+                        than theory battles, QQPoker fits that style well.
                       </div>
                     </details>
                   </div>
 
-                  <h4 style={{ margin: "14px 0 8px", fontSize: 14, letterSpacing: 0.2, color: "rgba(255, 241, 207, 0.92)" }}>
-                    Solving the most common concerns
+                  <h4
+                    style={{
+                      margin: "14px 0 8px",
+                      fontSize: 14,
+                      letterSpacing: 0.2,
+                      color: "rgba(255, 241, 207, 0.92)",
+                    }}
+                  >
+                    Good fit if you…
                   </h4>
-                  <div className="faq" style={{ gap: 10 }}>
-                    <details>
-                      <summary>KYC — only when it’s actually needed</summary>
-                      <div className="faq-body">
-                        Registration takes seconds, without front-loaded document uploads. You can start playing
-                        immediately. Verification (KYC) is flexible, and with EU documents it’s typically smooth when
-                        moving larger amounts.
-                      </div>
-                    </details>
 
-                    <details>
-                      <summary>Security and agent accountability</summary>
-                      <div className="faq-body">
-                        We’re fully aware of the risks in agent-based systems. That’s why we only recommend <b>validated,
-                        liquid channels</b> where payout reliability is not a promise — it’s a baseline requirement.
-                      </div>
-                    </details>
-
-                    <details>
-                      <summary>Crypto learning curve</summary>
-                      <div className="faq-body">
-                        If USDT is new to you, the interface keeps things simple. TRC20 transaction fees are low (roughly
-                        $1–2), making it one of the most cost-efficient ways to move funds.
-                      </div>
-                    </details>
-                  </div>
-
-                  <h4 style={{ margin: "14px 0 8px", fontSize: 14, letterSpacing: 0.2, color: "rgba(255, 241, 207, 0.92)" }}>
-                    Who QQPoker is for
-                  </h4>
                   <div className="note" style={{ marginTop: 8 }}>
                     <span>
-                      This platform makes sense if you:
-                      <br />- Want full control over your money (crypto-based).
-                      <br />- Prefer action-heavy tables instead of battling “robots.”
-                      <br />- Value mobility and modern, fast software.
+                      - Prefer mobile poker that feels smooth and direct.
+                      <br />- Want quick table access and an action-forward session.
+                      <br />- Are open to modern cashier options (including crypto where available).
                     </span>
                   </div>
 
                   <div className="note" style={{ marginTop: 10 }}>
-                    <b>VelvetCall Verdict</b>
+                    <b>Best suited for</b>
                     <span>
-                      QQPoker isn’t just an alternative — it’s a deliberate choice for players who value freedom. If
-                      you’re tired of banks, delays, and dried-out regulated pools, this is a fresh, professional, and
-                      reliable environment.
-                    </span>
-                  </div>
-
-                  <div className="note" style={{ marginTop: 10 }}>
-                    <b>Why this profile works better</b>
-                    <span>
-                      - <b>Problem-solving focus:</b> We don’t just describe KYC or crypto — we explain how they remove friction.
-                      <br />- <b>Concrete data:</b> The 15–60 minute withdrawals and TRC20 specifics add real credibility (E-E-A-T).
-                      <br />- <b>Honest marketing:</b> The tone stays direct (“soft field reality”) without drifting into hype or fantasy.
+                      QQPoker is the pick for fast, mobile-first sessions. If you
+                      want to keep it simple and play a clean session without
+                      overthinking the setup, start here.
                     </span>
                   </div>
 
@@ -214,12 +397,8 @@ export default function PokerPage() {
                       Partner details
                     </Link>
                     <Link className="btn ghost" href="/promotions">
-                      Promotions (read the terms)
+                      Offers & promos
                     </Link>
-                  </div>
-
-                  <div className="fineprint" style={{ marginTop: 10 }}>
-                    18+. Eligibility and availability vary by country. Always verify terms before depositing.
                   </div>
                 </div>
               </article>
@@ -227,95 +406,85 @@ export default function PokerPage() {
               {/* KKPoker */}
               <article className="pick" id="kkpoker" aria-label="KKPoker profile">
                 <div className="pick-head">
-                  <h3 className="pick-title">KKPoker — Club Poker Freedom with European-Grade Security</h3>
+                  <h3 className="pick-title">
+                    KKPoker — Club-style poker with a clean cashier
+                  </h3>
                   <span className="pilltag">Poker</span>
                 </div>
 
                 <div className="pick-body">
                   <p className="pick-sub">
-                    KKPoker is the bridge between Wild-West poker apps and heavily regulated global giants. It’s a
-                    mobile-first platform licensed in the Isle of Man, built around club play and operational
-                    transparency. No negotiating with agents is required — there’s a native cashier, stable payouts,
-                    and a player pool that’s still genuinely enjoyable.
+                    KKPoker blends a public lobby with club-style poker. If you
+                    enjoy community tables, private games, and a more “structured”
+                    feel inside the app, this is the balanced pick for everyday
+                    mobile play.
                   </p>
 
-                  <h4 style={{ margin: "14px 0 8px", fontSize: 14, letterSpacing: 0.2, color: "rgba(255, 241, 207, 0.92)" }}>
-                    Why KKPoker is worth your time
+                  <h4
+                    style={{
+                      margin: "14px 0 8px",
+                      fontSize: 14,
+                      letterSpacing: 0.2,
+                      color: "rgba(255, 241, 207, 0.92)",
+                    }}
+                  >
+                    What people like about KKPoker
                   </h4>
+
                   <div className="faq" style={{ gap: 10 }}>
                     <details open>
-                      <summary>The hybrid advantage</summary>
+                      <summary>Clubs + public lobby in one app</summary>
                       <div className="faq-body">
-                        You get access to private club tables (often with custom promotions) alongside a global public
-                        lobby. That means constant traffic and a lineup that never feels stale.
+                        You can play in club tables (often with a more social
+                        feel) and still have access to a public lobby. It’s a
+                        good match if you like variety without juggling multiple
+                        apps.
                       </div>
                     </details>
 
                     <details>
-                      <summary>Instant action, clean payouts</summary>
+                      <summary>Everyday-friendly setup</summary>
                       <div className="faq-body">
-                        Basic verification (email + phone) takes about two minutes, after which you can start playing
-                        immediately. Full KYC for withdrawals — using Finnish or EU documents — typically completes
-                        within <b>8 hours</b>.
+                        The experience is designed for regular play on mobile.
+                        What you can use for deposits and withdrawals depends on
+                        your country and the cashier options shown in the app.
                       </div>
                     </details>
 
                     <details>
-                      <summary>Serious rakeback</summary>
+                      <summary>Perks can be solid (depending on terms)</summary>
                       <div className="faq-body">
-                        Up to <b>50% rakeback</b>, paid as real, playable money — not points, not vouchers.
+                        Perks can include up to <b>50% rakeback</b> depending on
+                        the club and current terms.
                       </div>
                     </details>
                   </div>
 
-                  <h4 style={{ margin: "14px 0 8px", fontSize: 14, letterSpacing: 0.2, color: "rgba(255, 241, 207, 0.92)" }}>
-                    Designed for everyday play
+                  <h4
+                    style={{
+                      margin: "14px 0 8px",
+                      fontSize: 14,
+                      letterSpacing: 0.2,
+                      color: "rgba(255, 241, 207, 0.92)",
+                    }}
+                  >
+                    Good fit if you…
                   </h4>
-                  <div className="faq" style={{ gap: 10 }}>
-                    <details>
-                      <summary>Payment flexibility (Finland-friendly)</summary>
-                      <div className="faq-body">
-                        While many rooms struggle with banks, KKPoker supports <b>Skrill, Neteller, and LuxonPay</b>,
-                        with withdrawals usually landing within <b>4–24 hours</b>. Crypto players can also use USDT-TRC20
-                        as standard.
-                      </div>
-                    </details>
 
-                    <details>
-                      <summary>Fairer tables</summary>
-                      <div className="faq-body">
-                        External HUDs and assistance software are prohibited. This levels the field: decisions are driven
-                        by intuition and skill, not overlays. Much of the player pool consists of Asian recreational
-                        players, resulting in looser, more “fishy” tables.
-                      </div>
-                    </details>
-
-                    <details>
-                      <summary>Play anywhere</summary>
-                      <div className="faq-body">
-                        You’re not tied to a desktop setup. The app is stable, fast, and designed for real play — whether
-                        you’re on a bus in Helsinki or at home on the couch.
-                      </div>
-                    </details>
-                  </div>
-
-                  <h4 style={{ margin: "14px 0 8px", fontSize: 14, letterSpacing: 0.2, color: "rgba(255, 241, 207, 0.92)" }}>
-                    Who we recommend KKPoker to
-                  </h4>
                   <div className="note" style={{ marginTop: 8 }}>
                     <span>
-                      - <b>Mobile-first players</b> who want fast, app-based poker.
-                      <br />- <b>Community-driven players</b> who enjoy club freerolls and custom ecosystems.
-                      <br />- <b>Security-minded players</b> who want softer fields without giving up licensing and a reliable cashier.
+                      - Like club-style poker and community tables.
+                      <br />- Want a balanced, easy “default pick” for mobile poker.
+                      <br />- Prefer variety (private tables + public lobby) in one place.
                     </span>
                   </div>
 
                   <div className="note" style={{ marginTop: 10 }}>
-                    <b>VelvetCall Verdict</b>
+                    <b>Best suited for</b>
                     <span>
-                      In 2026, KKPoker stands out as one of the most stable choices available. You get the looseness and
-                      profitability associated with Asian apps — without sacrificing fund security. If you’re burned out
-                      from grinding against bots and solver-trained regs, this is where poker becomes enjoyable again.
+                      KKPoker is the steady, club-style option. If you want a
+                      community feel and a clean app flow for everyday sessions,
+                      this is the safe default choice.
                     </span>
                   </div>
 
@@ -324,12 +493,8 @@ export default function PokerPage() {
                       Partner details
                     </Link>
                     <Link className="btn ghost" href="/promotions">
-                      Promotions (read the terms)
+                      Offers & promos
                     </Link>
-                  </div>
-
-                  <div className="fineprint" style={{ marginTop: 10 }}>
-                    18+. Eligibility and availability vary by country. Always verify terms before depositing.
                   </div>
                 </div>
               </article>
@@ -343,7 +508,8 @@ export default function PokerPage() {
             <div className="note">
               <b>Reminder</b>
               <span>
-                If you’re unsure whether a site is available in your country, assume “maybe” and verify first.
+                Keep it fun: set a budget, take breaks, and stop when it stops
+                being enjoyable.
               </span>
             </div>
           </div>

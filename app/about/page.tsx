@@ -13,7 +13,7 @@ export default function AboutPage() {
         <div className="container">
           <div className="section-title">
             <h2>About VelvetCall — Why We Don’t Lie to You</h2>
-            <div className="hint">Edited from Finland. Built for clarity.</div>
+            <div className="hint">Independently edited. Built for clarity.</div>
           </div>
 
           <div
@@ -36,8 +36,8 @@ export default function AboutPage() {
             </p>
             <p>
               We launched VelvetCall in 2026 to break that model. We’re not saints. We earn money
-              too. But we have one non-negotiable rule: <b>we only recommend platforms where we
-              would personally sit down and play</b>.
+              too. But we have one non-negotiable rule:{" "}
+              <b>we only recommend platforms where we would personally sit down and play</b>.
             </p>
 
             <h3>2. The “Velvet Filter” — why the list is short</h3>
@@ -65,8 +65,8 @@ export default function AboutPage() {
 
             <h4 style={{ marginBottom: 6 }}>Player Experience (UX)</h4>
             <p>
-              Nobody wants a laggy, 2005-era app. If a mobile client can’t run smoothly while
-              commuting on a Helsinki bus, it doesn’t make the cut.
+              Nobody wants a laggy, 2005-era app. If a mobile client struggles under real-world
+              mobile conditions, it doesn’t make the cut.
             </p>
 
             <h3>3. Poker didn’t die — it evolved</h3>
@@ -93,19 +93,18 @@ export default function AboutPage() {
             <p>
               That said, we’re not blind evangelists. Crypto can be intimidating — and mistakes are
               expensive. That’s why we don’t just drop links. We explain networks (TRC20 vs. ERC20),
-              wallet basics, and the common errors that can cost you money <b>before a single hand is
-              dealt</b>.
+              wallet basics, and the common errors that can cost you money <b>before a single hand is dealt</b>.
             </p>
 
-            <h3>5. The Helsinki perspective — why location matters</h3>
+            <h3>5. Editorial perspective — why standards matter</h3>
             <p>
-              VelvetCall is edited from Finland, and that matters. Nordic culture values
-              transparency, reliability, and long-term trust. We apply the same logic here.
+              VelvetCall is built around a simple idea: trust is earned through consistency. We
+              apply the same editorial standards regardless of region, license type, or market hype.
             </p>
             <p>
-              We’re not interested in pushing offshore junk. We focus on international platforms
-              that can be used <b>legally, stably, and realistically from the EU — including
-              Finland</b>.
+              We focus on platforms that can be used legally and realistically by international
+              players, with stable access, predictable payouts, and clear rules — not geo-specific
+              loopholes.
             </p>
 
             <h3>6. What we are NOT</h3>

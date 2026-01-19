@@ -1,4 +1,5 @@
 import Link from "next/link";
+import React from "react";
 
 export const metadata = {
   title: "Casino | VelvetCall",
@@ -45,21 +46,80 @@ function SectionTitle({ title, hint }: { title: string; hint?: string }) {
   );
 }
 
+/**
+ * TODO: Replace these with your real affiliate tracking links once you have them.
+ * Keep them as full URLs. Do not shorten.
+ */
+const BETSAFE_AFFILIATE_URL = ""; // e.g. "https://your-tracking-link-for-betsafe"
+const LEOVEGAS_AFFILIATE_URL = ""; // e.g. "https://your-tracking-link-for-leovegas"
+
+function PrimaryOutbound({ href, label }: { href: string; label: string }) {
+  return (
+    <a
+      className="btn primary"
+      href={href}
+      target="_blank"
+      rel="nofollow sponsored noopener"
+    >
+      {label}
+    </a>
+  );
+}
+
+function MiniChecklist({
+  items,
+  title = "Quick Start Checklist",
+}: {
+  items: string[];
+  title?: string;
+}) {
+  return (
+    <div
+      style={{
+        border: "1px solid rgba(255,255,255,0.10)",
+        borderRadius: 14,
+        padding: 14,
+        marginTop: 12,
+        background: "rgba(255,255,255,0.03)",
+      }}
+      aria-label={title}
+    >
+      <div className="fineprint" style={{ margin: 0, fontWeight: 600 }}>
+        {title}
+      </div>
+      <ul style={{ margin: "10px 0 0", paddingLeft: 18 }}>
+        {items.map((it, idx) => (
+          <li key={idx} style={{ margin: "6px 0" }}>
+            {it}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export default function CasinoPage() {
+  const betsafeHasLink =
+    typeof BETSAFE_AFFILIATE_URL === "string" &&
+    BETSAFE_AFFILIATE_URL.trim().length > 0;
+  const leovegasHasLink =
+    typeof LEOVEGAS_AFFILIATE_URL === "string" &&
+    LEOVEGAS_AFFILIATE_URL.trim().length > 0;
+
   return (
     <main className="site-main">
       <section className="hero" aria-label="Casino overview">
         <div className="container">
           <div className="hero-left" style={{ maxWidth: "none" }}>
             <span className="kicker">
-              Casino and sportsbook as entertainment — clear risks, clean expectations, no fantasy.
+              Casino and sportsbook as entertainment — clear expectations, practical checks, no hype.
             </span>
 
             <h1>Casino</h1>
 
             <p className="lead">
               VelvetCall is editorial. We don’t take deposits, place bets, or process payments.
-              We link out and tell you what to verify before you spend money — especially from Finland / the EU.
+              We link out and highlight what to verify before you spend money — especially from EU.
             </p>
 
             <div className="cta-row" aria-label="Primary actions">
@@ -76,7 +136,7 @@ export default function CasinoPage() {
                 Updated: <code>2026-01-16</code>
               </span>
               <span>
-                Scope: <code>Finland / EU</code> (country-fit flagged)
+                Scope: <code>EU</code> (country-fit flagged)
               </span>
             </div>
           </div>
@@ -84,25 +144,50 @@ export default function CasinoPage() {
       </section>
 
       {/* =======================
-          EVERYGAME
+          BETSAFE
          ======================= */}
-      <section className="section" aria-label="Everygame">
+      <section className="section" aria-label="BetSafe">
         <div className="container">
           <SectionTitle
-            title="Everygame"
-            hint="A veteran brand focused on sportsbook + casino."
+            title="BetSafe"
+            hint="Mainstream sportsbook + casino with standard verification, limits, and account controls. Always confirm local availability and operator details for your country."
           />
 
           <div className="picks-grid">
-            <Card title="Everygame — The veteran that’s still unbeatable in sportsbook and casino" hint="Sports + Casino">
+            <Card
+              title="BetSafe — mainstream sportsbook + casino, built for repeat use"
+              hint="Sportsbook + Casino"
+            >
               <p className="pick-sub">
-                Everygame (formerly Intertops) is one of the oldest engines in online gambling. They’ve been active since 1996, and while a lot has changed — for example, the poker division permanently shut down at the end of 2025 — the core remains: a stable offshore base for people who want sportsbook and casino under one account.
+                BetSafe is positioned for people who want a familiar sportsbook + casino flow:
+                clear navigation, standard payments, and an account setup that expects verification when it matters.
+                The value is operational clarity — fewer surprises around limits, eligibility, and withdrawals.
               </p>
 
-              <div className="pick-actions">
-                <Link className="btn primary" href="/partners#everygame">
-                  Partner details
-                </Link>
+              <p className="pick-sub">
+                Expect the usual portfolio: pre-match and live sports betting, slots, and live casino.
+                Promotions are optional. If you opt in, withdrawals may be delayed by bonus audits (wagering, max bet rules, time limits).
+                If you want fewer constraints, skip promos and play with cash balance only.
+              </p>
+
+              <MiniChecklist
+                items={[
+                  "Availability for Finland/EU and the exact local terms shown during signup.",
+                  "Withdrawal/KYC expectations: assume standard verification can trigger at first meaningful cashout.",
+                  "Promo terms (only if you take them): wagering, time limits, max bet, restricted games.",
+                  "Payment method consistency: depositing and withdrawing with the same method usually reduces reviews.",
+                ]}
+              />
+
+              <div className="pick-actions" style={{ marginTop: 14 }}>
+                {betsafeHasLink ? (
+                  <PrimaryOutbound href={BETSAFE_AFFILIATE_URL} label="Play on BetSafe" />
+                ) : (
+                  <Link className="btn primary" href="/partners#betsafe">
+                    Partner details
+                  </Link>
+                )}
+
                 <Link className="btn ghost" href="/promotions">
                   Promotions (read the terms)
                 </Link>
@@ -114,71 +199,113 @@ export default function CasinoPage() {
             </Card>
 
             <Card title="VelvetCall Verdict" hint="Editorial">
+              <div
+                style={{
+                  display: "flex",
+                  gap: 10,
+                  flexWrap: "wrap",
+                  marginTop: 0,
+                  marginBottom: 12,
+                }}
+              >
+                <Pill>Mainstream operations</Pill>
+                <Pill>Sportsbook + Casino</Pill>
+                <Pill>Limits & account controls</Pill>
+              </div>
+
               <p className="pick-sub" style={{ marginTop: 0 }}>
-                In 2026, Everygame is no longer about poker. It’s a hard Sport + Casino platform built for people who value longevity, faster crypto withdrawals, and a no-nonsense experience. If you’re not looking to play poker — you want to bet and win — this is one of the safest anchors in the market.
+                BetSafe fits users who want a conventional, policy-led platform where the rules are explicit and consistent with
+                standard industry practice (verification, limits, promo conditions). If your priority is “no-friction, no-terms” play,
+                treat bonuses as optional and focus on cash balance sessions.
               </p>
-              <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 }}>
-                <Pill>Sportsbook-first</Pill>
-                <Pill>Crypto rails</Pill>
-                <Pill>Predictable process</Pill>
+
+              <div className="pick-actions" style={{ marginTop: 14 }}>
+                {betsafeHasLink ? (
+                  <PrimaryOutbound href={BETSAFE_AFFILIATE_URL} label="Open BetSafe" />
+                ) : (
+                  <Link className="btn primary" href="/partners#betsafe">
+                    View BetSafe details
+                  </Link>
+                )}
+                <Link className="btn ghost" href="/policy">
+                  Read policy
+                </Link>
               </div>
             </Card>
           </div>
 
           <div style={{ height: 14 }} />
 
-          <div className="faq" aria-label="Everygame details">
+          <div className="faq" aria-label="BetSafe details">
             <details>
-              <summary>Why Everygame if poker is gone?</summary>
+              <summary>What should you verify before depositing?</summary>
               <div className="faq-body">
                 <p style={{ margin: 0 }}>
-                  Many people wrote them off after poker stopped, but in reality, it clarified their identity. Today the platform stands on two brutally strong legs:
+                  Before you deposit, verify these four items. They prevent the most common withdrawal delays:
+                </p>
+
+                <p style={{ margin: "10px 0 0" }}>
+                  <b>Country availability:</b> confirm Finland/EU access and read the local terms shown at signup.
                 </p>
                 <p style={{ margin: "10px 0 0" }}>
-                  <b>Sportsbook for pros and recreational bettors:</b> It’s not only the headline matches. From the NBA to hockey, they cover a wide range, and their odds structure has been among the most stable for decades. If you like live betting and fast “halftime” markets, you won’t be disappointed.
+                  <b>Promo terms (optional):</b> wagering requirement, time limit, max bet while bonused, restricted games.
+                  If you don’t want constraints, skip promos.
                 </p>
                 <p style={{ margin: "10px 0 0" }}>
-                  <b>Double casino experience:</b> You don’t get one casino universe — you get two. Casino Red is the modern, fast video-slot side; Casino Classic brings back the clean, traditional table-game feel.
+                  <b>Verification:</b> assume standard KYC can trigger at first meaningful withdrawal. Keep ID and a recent address proof available.
+                </p>
+                <p style={{ margin: "10px 0 0" }}>
+                  <b>Payments:</b> using the same method for deposits and withdrawals typically reduces manual reviews.
+                </p>
+
+                <div className="pick-actions" style={{ marginTop: 14 }}>
+                  {betsafeHasLink ? (
+                    <PrimaryOutbound href={BETSAFE_AFFILIATE_URL} label="Continue to BetSafe" />
+                  ) : (
+                    <Link className="btn primary" href="/partners#betsafe">
+                      Partner details
+                    </Link>
+                  )}
+                  <Link className="btn ghost" href="/promotions">
+                    Promo terms overview
+                  </Link>
+                </div>
+              </div>
+            </details>
+
+            <details>
+              <summary>Responsible gaming: what tools matter in practice?</summary>
+              <div className="faq-body">
+                <p style={{ margin: 0 }}>
+                  The tools that usually matter are the simple ones you can set once and keep:
+                  deposit limits, loss limits, session/time limits, and cool-off/self-exclusion.
+                </p>
+                <p style={{ margin: "10px 0 0" }}>
+                  Set limits while you’re calm. If you wait for a bad night, you’ll set them too late or not at all.
                 </p>
               </div>
             </details>
 
             <details>
-              <summary>The VelvetCall factor: why can you trust them?</summary>
+              <summary>Who do we recommend BetSafe to?</summary>
               <div className="faq-body">
                 <p style={{ margin: 0 }}>
-                  <b>Payout discipline:</b> While newer sites often play games, Everygame relies on reputation. With cryptocurrency (Bitcoin, USDT), based on 2026 data, withdrawals are processed within 48 hours. No excuses, no unnecessary waiting.
+                  For players who want a mainstream sportsbook + casino with standard rails, clear account controls,
+                  and predictable verification steps — not a crypto-native “speed-only” experience.
                 </p>
-                <p style={{ margin: "10px 0 0" }}>
-                  <b>Predictable KYC:</b> They don’t jump on you immediately at signup. You can play and deposit, but know this: before the first withdrawal — for your own security as well — they will request your documents. With Finnish or EU documents, it’s a fast, routine process.
-                </p>
-                <p style={{ margin: "10px 0 0" }}>
-                  <b>Limits you can plan around:</b> Up to $2500 per week, withdrawals are smooth. The system is optimized for regular, smaller cashouts — not a one-time “bank heist.”
-                </p>
-              </div>
-            </details>
 
-            <details>
-              <summary>Solutions to your common objections</summary>
-              <div className="faq-body">
-                <p style={{ margin: 0 }}>
-                  <b>“I’m afraid of offshore sites.”</b> Everygame has proven for 30 years that stability isn’t only about the license — it’s about the track record. They won’t vanish tomorrow.
-                </p>
-                <p style={{ margin: "10px 0 0" }}>
-                  <b>“I want my money fast.”</b> Use crypto. Skrill and Neteller are options (4–24 hours), but crypto is their most streamlined pipeline.
-                </p>
-                <p style={{ margin: "10px 0 0" }}>
-                  <b>“Bonuses are too complicated.”</b> They use a code-based system (e.g., ROOKIE RAISE). It’s transparent, you choose whether you want it, and the wagering conditions are clearly stated.
-                </p>
-              </div>
-            </details>
-
-            <details>
-              <summary>Who do we recommend it to?</summary>
-              <div className="faq-body">
-                <p style={{ margin: 0 }}>
-                  For people who want a reliable “everything in one place” platform where sportsbook comes first, but there’s room for a few fast casino sessions as well.
-                </p>
+                <div className="pick-actions" style={{ marginTop: 14 }}>
+                  {betsafeHasLink ? (
+                    <PrimaryOutbound href={BETSAFE_AFFILIATE_URL} label="Open BetSafe" />
+                  ) : (
+                    <Link className="btn primary" href="/partners#betsafe">
+                      View BetSafe details
+                    </Link>
+                  )}
+                  <Link className="btn ghost" href="/partners">
+                    Compare partners
+                  </Link>
+                </div>
               </div>
             </details>
           </div>
@@ -186,25 +313,50 @@ export default function CasinoPage() {
       </section>
 
       {/* =======================
-          LUCKY BLOCK
+          LEOVEGAS
          ======================= */}
-      <section className="section" aria-label="Lucky Block">
+      <section className="section" aria-label="LeoVegas">
         <div className="container">
           <SectionTitle
-            title="Lucky Block (2026)"
-            hint="Crypto-forward casino + sportsbook, wallet-first."
+            title="LeoVegas"
+            hint="Mobile-focused casino UX with standard payment rails and verification. Always confirm local availability and the exact payment methods shown in your market."
           />
 
           <div className="picks-grid">
-            <Card title="Lucky Block (2026) — Crypto-based casino and sportsbook where speed is the baseline" hint="Casino + Sportsbook">
+            <Card
+              title="LeoVegas — a mobile-focused casino experience"
+              hint="Casino (mobile)"
+            >
               <p className="pick-sub">
-                Lucky Block is a platform for modern, “wallet-first” players. If you’re tired of bank bureaucracy and withdrawals that take days, this is your place. Here, crypto isn’t just an extra option — it’s the engine: deposits are instant, and withdrawals — based on 2026 data — often land in your wallet within minutes.
+                LeoVegas is oriented around phone-first sessions: fast game discovery, quick navigation, and an interface that stays readable
+                without turning into a menu maze. If you mostly play on mobile, the usability difference is practical: fewer taps, fewer dead ends,
+                and a smoother banking-to-game flow.
               </p>
 
-              <div className="pick-actions">
-                <Link className="btn primary" href="/partners#luckyblock">
-                  Partner details
-                </Link>
+              <p className="pick-sub">
+                Payments are typically standard rails (cards, e-wallets, bank transfer solutions depending on country).
+                If your requirement is a crypto-native workflow, this is not that model.
+              </p>
+
+              <MiniChecklist
+                title="Fast Payout Hygiene"
+                items={[
+                  "Confirm payment methods available in your country before depositing.",
+                  "Assume standard verification can trigger at withdrawal; keep digital ID/address proof ready.",
+                  "If you take promos: follow max bet and time limits precisely, or expect bonus reviews.",
+                  "Prefer deposit/withdraw with the same method when possible.",
+                ]}
+              />
+
+              <div className="pick-actions" style={{ marginTop: 14 }}>
+                {leovegasHasLink ? (
+                  <PrimaryOutbound href={LEOVEGAS_AFFILIATE_URL} label="Play on LeoVegas" />
+                ) : (
+                  <Link className="btn primary" href="/partners#leovegas">
+                    Partner details
+                  </Link>
+                )}
+
                 <Link className="btn ghost" href="/promotions">
                   Promotions (read the terms)
                 </Link>
@@ -216,98 +368,117 @@ export default function CasinoPage() {
             </Card>
 
             <Card title="VelvetCall Verdict" hint="Editorial">
+              <div
+                style={{
+                  display: "flex",
+                  gap: 10,
+                  flexWrap: "wrap",
+                  marginTop: 0,
+                  marginBottom: 12,
+                }}
+              >
+                <Pill>Mobile-first sessions</Pill>
+                <Pill>Cards + e-wallets</Pill>
+                <Pill>Standard verification</Pill>
+              </div>
+
               <p className="pick-sub" style={{ marginTop: 0 }}>
-                The “minutes” story is only useful if you also accept the reality: KYC can trigger, and network speed differs by chain. The trust comes from stating both.
+                LeoVegas is a strong fit if you care about mobile usability and you’re comfortable with normal verification steps at withdrawal.
+                The main “friction lever” is promos: they can add constraints and reviews. If you want a cleaner cashout path,
+                treat promos as optional and keep sessions straightforward.
               </p>
-              <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 }}>
-                <Pill>Wallet-first</Pill>
-                <Pill>Crypto payouts</Pill>
-                <Pill>Country rules matter</Pill>
+
+              <div className="pick-actions" style={{ marginTop: 14 }}>
+                {leovegasHasLink ? (
+                  <PrimaryOutbound href={LEOVEGAS_AFFILIATE_URL} label="Open LeoVegas" />
+                ) : (
+                  <Link className="btn primary" href="/partners#leovegas">
+                    View LeoVegas details
+                  </Link>
+                )}
+                <Link className="btn ghost" href="/policy">
+                  Read policy
+                </Link>
               </div>
             </Card>
           </div>
 
           <div style={{ height: 14 }} />
 
-          <div className="faq" aria-label="Lucky Block details">
+          <div className="faq" aria-label="LeoVegas details">
             <details>
-              <summary>Why Lucky Block? (The 3 value pillars)</summary>
+              <summary>What does “mobile-focused” mean in practice?</summary>
               <div className="faq-body">
                 <p style={{ margin: 0 }}>
-                  <b>Lightning-fast payout flow:</b> While traditional casinos can take 48 hours, here crypto withdrawals (USDT, BTC, LTC) are designed to start processing within minutes. Your money doesn’t “rest” on the casino balance unnecessarily.
-                </p>
-                <p style={{ margin: "10px 0 0" }}>
-                  <b>Huge game library + sportsbook:</b> One account gives you access to major slots and a broad live sportsbook. Whether it’s a Champions League match or a new Pragmatic slot, you don’t need multiple registrations.
-                </p>
-                <p style={{ margin: "10px 0 0" }}>
-                  <b>Buy crypto directly on-site:</b> No crypto yet? No problem. Via embedded providers (e.g., MoonPay), you can buy “fuel” with a bank card without dealing with exchanges separately.
+                  In practice it means: clearer navigation on small screens, fewer broken UI states, and faster access to banking and live casino.
+                  If you play short sessions and you’re mostly on phone, this matters more than marketing slogans.
                 </p>
               </div>
             </details>
 
             <details>
-              <summary>The truth about KYC (verification)</summary>
+              <summary>Verification reality: what should you prepare?</summary>
               <div className="faq-body">
                 <p style={{ margin: 0 }}>
-                  VelvetCall doesn’t pretend: Lucky Block is not “no-KYC forever.” While signup is fast and the entry barrier is generally low, for larger amounts or suspicious patterns the security filter can trigger.
+                  Assume verification can trigger at first meaningful withdrawal. Keep:
+                  <b> an ID</b> and <b>a recent address proof</b> accessible (digital copies are typically sufficient).
+                  Also try to keep deposit and withdrawal methods consistent when possible.
                 </p>
-                <p style={{ margin: "10px 0 0" }}>
-                  <b>Pro tip for speed:</b> If you’re playing from Finland, keep a recent proof of address and a photo of your passport ready. If your details are consistent and you use the same wallet for deposits and withdrawals, verification (if triggered) typically clears within a few hours.
-                </p>
+
+                <div className="pick-actions" style={{ marginTop: 14 }}>
+                  <Link className="btn ghost" href="/policy">
+                    Why KYC exists
+                  </Link>
+                  <Link className="btn ghost" href="/promotions">
+                    Promo rules overview
+                  </Link>
+                </div>
               </div>
             </details>
 
             <details>
-              <summary>Withdrawal realities (Processing vs. Network)</summary>
+              <summary>Promos: a practical tip for faster payouts</summary>
               <div className="faq-body">
                 <p style={{ margin: 0 }}>
-                  Don’t mix two different speeds:
+                  Most “can’t withdraw yet” situations come from unfinished wagering or promo rule violations (max bet, restricted games, time limit).
+                  If you want fewer constraints, skip promos. If you take them, follow the terms exactly.
                 </p>
-                <p style={{ margin: "10px 0 0" }}>
-                  <b>Processing (casino side):</b> Lucky Block targets approval within 24 hours, but for crypto it’s often 5–20 minutes.
-                </p>
-                <p style={{ margin: "10px 0 0" }}>
-                  <b>Network (blockchain):</b> Once the payout is sent, it depends on chain speed (e.g., Tron/TRC20 is near-instant; Bitcoin is slower).
-                </p>
+
+                <div className="pick-actions" style={{ marginTop: 14 }}>
+                  {leovegasHasLink ? (
+                    <PrimaryOutbound href={LEOVEGAS_AFFILIATE_URL} label="Continue to LeoVegas" />
+                  ) : (
+                    <Link className="btn primary" href="/partners#leovegas">
+                      Partner details
+                    </Link>
+                  )}
+                  <Link className="btn ghost" href="/partners">
+                    Compare partners
+                  </Link>
+                </div>
               </div>
             </details>
 
             <details>
-              <summary>Important notes (Regional disclaimer)</summary>
+              <summary>Who do we recommend LeoVegas to?</summary>
               <div className="faq-body">
                 <p style={{ margin: 0 }}>
-                  Lucky Block availability is country-dependent. From Finland, access is generally stable, but the terms prohibit bypassing restricted territories (e.g., UK, USA) via VPN. VelvetCall supports clean play: check the official “Restricted Territories” list before you start.
+                  For players who want a clean mobile casino experience with standard payment rails, and who prefer straightforward verification
+                  rather than niche payment workflows.
                 </p>
-              </div>
-            </details>
 
-            <details>
-              <summary>FAQ — quick answers</summary>
-              <div className="faq-body">
-                <p style={{ margin: 0 }}>
-                  <b>What’s the minimum withdrawal?</b> Depends on the crypto, but typically friendly: e.g., 1 USDT or 10 TRX.
-                </p>
-                <p style={{ margin: "10px 0 0" }}>
-                  <b>Do I need a VPN?</b> The rules prohibit bypassing geo-restrictions with VPN. If it’s not available in your country, don’t force it — your withdrawal can suffer.
-                </p>
-                <p style={{ margin: "10px 0 0" }}>
-                  <b>Is there a bonus?</b> Yes, but read the wagering conditions. A common withdrawal blocker is an unfinished bonus rollover.
-                </p>
-              </div>
-            </details>
-
-            <details>
-              <summary>Why is this version good?</summary>
-              <div className="faq-body">
-                <p style={{ margin: 0 }}>
-                  <b>Helsinki mindset:</b> Finnish users tend to value technical clarity (TRC20, MoonPay, processing times) and legal safety.
-                </p>
-                <p style={{ margin: "10px 0 0" }}>
-                  <b>YMYL-safe:</b> We don’t encourage rule-breaking (VPN), which is a trust signal (E-E-A-T).
-                </p>
-                <p style={{ margin: "10px 0 0" }}>
-                  <b>Marketing + reality:</b> The “minutes” story is balanced with the truth: KYC can happen. That’s how you build trust.
-                </p>
+                <div className="pick-actions" style={{ marginTop: 14 }}>
+                  {leovegasHasLink ? (
+                    <PrimaryOutbound href={LEOVEGAS_AFFILIATE_URL} label="Open LeoVegas" />
+                  ) : (
+                    <Link className="btn primary" href="/partners#leovegas">
+                      View LeoVegas details
+                    </Link>
+                  )}
+                  <Link className="btn ghost" href="/partners">
+                    See all partners
+                  </Link>
+                </div>
               </div>
             </details>
           </div>

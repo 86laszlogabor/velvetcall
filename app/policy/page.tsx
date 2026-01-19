@@ -1,4 +1,3 @@
-// app/policy/page.tsx
 import Link from "next/link";
 
 export const metadata = {
@@ -82,8 +81,6 @@ export default function PolicyPage() {
             </div>
 
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 14 }}>
-              <Pill>Minimal data</Pill>
-              <Pill>No selling</Pill>
               <Pill>Affiliate disclosure</Pill>
               <Pill>18+</Pill>
             </div>
@@ -130,7 +127,7 @@ export default function PolicyPage() {
                 unless we must keep something for legal/compliance reasons (rare).
               </p>
               <div className="fineprint" style={{ marginTop: 10 }}>
-                We aim to comply with EU data protection rules (GDPR).
+                We aim to comply with applicable data protection rules.
               </div>
             </Card>
 
@@ -173,8 +170,8 @@ export default function PolicyPage() {
                 If you click out and play, you do so at your own discretion and responsibility.
               </p>
               <p className="pick-sub" style={{ marginBottom: 0 }}>
-                VelvetCall is not responsible for losses, disputes, or technical issues on third-party sites (e.g.,
-                Lucky Block, Everygame). Those services run their own terms and systems.
+                VelvetCall is not responsible for losses, disputes, or technical issues on third-party sites. Those
+                services run their own terms and systems.
               </p>
             </Card>
 
